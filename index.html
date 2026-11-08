@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f7f6f2">
+  <meta name="description" content="Palace — dit rolige studierum til HHX. Flashcards, quizzer, noter og fagværktøjer. Alt gemmes lokalt.">
+  <title>Palace — Dit studierum</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%2367755a'/%3E%3Cpath d='M10 30V16h5v-6h10v6h5v14M17 30v-9a3 3 0 016 0v9M8 30h24' fill='none' stroke='white' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Spring til indhold</a>
+  <div id="sidebar-scrim" class="scrim" hidden></div>
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Fag og kilder">
+      <a href="#" class="brand" id="brand" aria-label="Palace, gå til forsiden">
+        <span class="brand-mark"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 27V12h6V5h10v7h6v15M12 27v-8a4 4 0 0 1 8 0v8M3 27h26M11 9h10"/></svg></span>
+        Palace<span class="brand-dot">.</span>
+      </a>
+      <div class="workspace-label">DIT PERSONLIGE STUDIERUM <span>HHX</span></div>
+      <button class="nav-home active" id="home-button"><span data-icon="grid"></span> Alle mine fag <span class="shortcut">⌂</span></button>
+      <div class="search-wrap"><span data-icon="search"></span><input id="search" type="search" placeholder="Søg i alle fag…" aria-label="Søg på tværs af alle fag" autocomplete="off"><kbd>/</kbd></div>
+      <label for="subject-select" class="eyebrow">AKTUELT FAG</label>
+      <div class="subject-select-wrap"><span id="subject-icon" class="subject-icon"></span><select id="subject-select" aria-label="Vælg fag"></select></div>
+      <div class="sidebar-section">
+        <label for="learning-goals" class="section-label"><span data-icon="target"></span>Læringsmål <span class="tiny">Dit fokus</span></label>
+        <textarea id="learning-goals" rows="3" maxlength="8000" placeholder="Hvad vil du gerne forstå bedre?"></textarea>
+      </div>
+      <div class="sidebar-section sources-section">
+        <div class="section-label"><span data-icon="folder"></span>Kilder <span id="source-count" class="count">0</span></div>
+        <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="Tilføj PDF, tekst eller billeder">
+          <span class="upload-circle" data-icon="upload"></span>
+          <strong>Giv Palace dit pensum</strong>
+          <span>Slip filer eller mapper her,<br>eller klik for at vælge</span>
+          <small>PDF, tekst og billeder · maks. 1,5 MB/fil</small>
+        </div>
+        <div class="source-actions"><button class="text-button" id="choose-folder"><span data-icon="folder"></span>Vælg mappe</button><span class="tiny" id="storage-size">Kun på din enhed</span></div>
+        <input id="file-input" type="file" multiple accept=".pdf,.txt,.md,.csv,.png,.jpg,.jpeg,.webp,.gif" hidden>
+        <input id="folder-input" type="file" webkitdirectory multiple hidden>
+        <ul id="source-list" class="source-list" aria-label="Uploadede kilder"></ul>
+      </div>
+      <div class="sidebar-bottom">
+        <div class="privacy"><span class="status-dot"></span> Dit pensum. Din enhed.</div>
+        <div class="bottom-actions"><button id="backup-button" title="Eksportér eller importér en sikkerhedskopi"><span data-icon="archive"></span> Backup</button><button id="theme-button" class="icon-button" title="Skift tema" aria-label="Skift tema"><span data-icon="sun"></span></button><button id="help-button" class="icon-button" aria-label="Hjælp og genveje"><span data-icon="help"></span></button></div>
+      </div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <button id="menu-button" class="icon-button mobile-only" aria-label="Åbn menu" aria-expanded="false" aria-controls="sidebar"><span data-icon="menu"></span></button>
+        <nav class="breadcrumb" aria-label="Brødkrumme"><span data-icon="home"></span><span>/</span><span id="breadcrumb">Dit overblik</span></nav>
+        <div class="topbar-right"><span class="local-badge"><span class="status-dot"></span> Gemt lokalt</span><span class="avatar" aria-label="Din personlige arbejdsplads">P</span></div>
+      </header>
+      <div class="workspace-body">
+        <div class="center-column">
+          <main id="main" tabindex="-1" aria-label="Studierum"></main>
+          <div class="composer-area">
+            <div id="chat-messages" class="chat-messages" aria-live="polite"></div>
+            <form id="chat-form" class="composer">
+              <label class="sr-only" for="chat-input">Spørg Palace</label>
+              <textarea id="chat-input" rows="1" maxlength="2000" placeholder="Usikker på, hvor du skal starte? Spørg Palace."></textarea>
+              <div class="composer-controls"><div><button type="button" id="attach-button" class="icon-button" aria-label="Vedhæft en kilde" title="Vedhæft en kilde"><span data-icon="paperclip"></span></button><span class="composer-hint">Din lokale studiehjælper</span></div><div><button type="button" id="mic-button" class="icon-button" aria-label="Indtal et spørgsmål" title="Indtal (hvis browseren understøtter det)"><span data-icon="mic"></span></button><button type="submit" class="send-button" aria-label="Send spørgsmål"><span data-icon="arrow-up"></span></button></div></div>
+            </form>
+            <p class="composer-footnote">Et lille skridt hver dag gør en stor forskel. <span>Ingen AI-forbindelse · ingen konto</span></p>
+          </div>
+        </div>
+        <aside class="study-panel" aria-label="Studieværktøjer">
+          <div class="panel-heading"><h2>Studér</h2><span class="tiny">I dit tempo</span></div>
+          <div class="study-context"><span id="panel-subject-icon"></span><span id="panel-subject-name"></span><span class="status-dot"></span></div>
+          <div id="tool-groups"></div>
+          <div class="study-tip"><span data-icon="sparkle"></span><p><strong>Lidt, men ofte.</strong><br>10 minutters genkaldelse slår endnu en gennemlæsning.</p></div>
+        </aside>
+      </div>
+    </div>
+  </div>
+  <dialog id="dialog" aria-labelledby="dialog-title"><div id="dialog-content"></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <input id="import-input" type="file" accept="application/json,.json" hidden>
+</body>
+</html>
